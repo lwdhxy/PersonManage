@@ -91,32 +91,34 @@
                   autocomplete="off" class="layui-input" value="${job.address }">
               </div>
           </div>
-  			<div class="layui-form-item">
-              <label for="job_id" class="layui-form-label">
-                  <span class="x-red">*</span>职位
-              </label>
-              <div class="layui-input-inline">
-                  <select id="job_id" name="jobId" class="valid" >
-                    <c:forEach items="${requestScope.job_list}" var="line" varStatus="stat">
-                    <option value="${line.id}" <c:if test="${job.jobId == line.id }">selected</c:if>>${line.name}</option>
-                    </c:forEach>
-                  </select>
-              </div>
-          </div>
             <div class="layui-form-item">
-              <label for="dept_id" class="layui-form-label">
+                <label for="deptId" class="layui-form-label">
                   <span class="x-red">*</span>部门
               </label>
-              <div class="layui-input-inline">
-                  <select id="dept_id" name="deptId" class="valid">
+                <div class="layui-input-inline">
+                    <select id="deptId" name="deptId" class="valid" lay-filter="dept" lay-verify="required" >
+                        <option value="">请选择所属部门</option>
                     <c:forEach items="${requestScope.dept_list}" var="line" varStatus="stat">
                     <option value="${line.id}" <c:if test="${job.deptId == line.id }">selected</c:if>>${line.name}</option>
                     </c:forEach>
                   </select>
-              </div>
-          </div>         
-          
+                </div>
+            </div>
 
+            <div class="layui-form-item">
+                <label for="jobId" class="layui-form-label">
+                    <span class="x-red">*</span>职位
+                </label>
+                <div class="layui-input-inline">
+                    <select id="jobId" name="jobId" class="valid" lay-verify="required">
+                        <option value="">请选择所属职位</option>
+                        <c:forEach items="${requestScope.job_list}" var="line" varStatus="stat">
+                            <option value="${line.id}" <c:if test="${job.jobId == line.id }">selected</c:if>>${line.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" value="${job.createDate }" id="createDate" name="createDate">
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
@@ -173,8 +175,42 @@
             //发异步，把数据提交给php
             return false;
           });
-          
-          
+        });
+    </script>
+
+
+    <script type="application/javascript">
+        var layData = [ 'form' ];
+        layui.use(layData, function() {
+            var form = layui.form;
+            form.on('select(dept)', function(data){
+                // initChildAreas(data.value, 'city');
+                 console.log("1234")
+                // console.log( document.getElementById("deptId").value);
+                $.ajax({
+                    type : "GET",
+                    url : "/joblist",
+                    data: {
+                        id : document.getElementById("deptId").value
+                    },
+                    success :function(data) {
+                        console.log(data);
+                        console.log(data.length);
+                        if (true) {
+                            $("#jobId").find("option").remove();
+                            form.render();
+                        }
+                        for(var i= 0; i< data.length;i++) {
+                            $("#jobId").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+                            form.render();
+                            // console.log(data.length)
+                            console.log(data[i].name +  "--"  + data[i].id);
+                        }
+                    }
+                })
+                form.render();
+                console.log(document.getElementById("jobId"))
+            });
         });
     </script>
     

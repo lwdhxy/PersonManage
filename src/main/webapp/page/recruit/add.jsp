@@ -26,11 +26,12 @@
             <form class="layui-form" method="POST" id="deptForm"  action="${ctx}/recruit/add">
             <input type="hidden" name="id" id="id" value="${job.id }" >
             <div class="layui-form-item">
-                    <label for="phone" class="layui-form-label">
+                    <label for="deptId" class="layui-form-label">
                         <span class="x-red">*</span>招聘部门
                     </label>
                     <div class="layui-input-inline">
                         <select id="deptId" name="deptId" class="valid" lay-filter="dept">
+                            <option value="">请选择部门</option>
                             <c:forEach items="${requestScope.dept_list}" var="line" varStatus="stat">
                           <option value="${line.id}" <c:if test="${recruit.dept_d == line.id }">selected</c:if>>${line.name}</option>
                           </c:forEach>
@@ -38,7 +39,7 @@
                     </div>         
                 </div>
                 <div class="layui-form-item">
-                        <label for="phone" class="layui-form-label">
+                        <label for="jobId" class="layui-form-label">
                             <span class="x-red">*</span>招聘职位
                         </label>
                         <div class="layui-input-inline">
@@ -50,7 +51,7 @@
                         </div>         
                     </div>   
               <div class="layui-form-item">
-                  <label for="username" class="layui-form-label">
+                  <label for="name" class="layui-form-label">
                       <span class="x-red">*</span>招聘人数
                   </label>
                   <div class="layui-input-inline">
@@ -60,7 +61,7 @@
                  
               </div>
               <div class="layui-form-item">
-                  <label for="phone" class="layui-form-label">
+                  <label for="remark" class="layui-form-label">
                       <span class="x-red">*</span>招聘详细
                   </label>
                   <div class="layui-input-inline">
@@ -121,7 +122,7 @@
         // console.log("1234")
         // console.log( document.getElementById("deptId").value);
         $.ajax({
-            type : "GET",
+        type : "GET",
         url : "./joblist",
         data: {
           id : document.getElementById("deptId").value

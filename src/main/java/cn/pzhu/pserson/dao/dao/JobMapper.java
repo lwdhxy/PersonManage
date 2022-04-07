@@ -25,7 +25,7 @@ public interface JobMapper extends Mapper<Job> {
   @SelectProvider(type = JobDynaSqlProvider.class, method = "insertDept")
   void insert_Info(Job job);
 
-  @Select("select * from " + Constants.JOBTABLE + " where id = #{id}")
+  @Select("select id,dept_id deptId,name,remark from " + Constants.JOBTABLE + " where id = #{id}")
   Job get_Info(Integer id);
 
   @SelectProvider(type = JobDynaSqlProvider.class, method = "updateDept")

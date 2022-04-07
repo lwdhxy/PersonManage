@@ -28,7 +28,7 @@
         <form class="layui-form" method="POST" id="deptForm"  action="${ctx}/job/add">
         <input type="hidden" name="id" id="id" value="${job.id }" >
           <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
+              <label for="name" class="layui-form-label">
                   <span class="x-red">*</span>职位名称
               </label>
               <div class="layui-input-inline">
@@ -38,7 +38,7 @@
              
           </div>
           <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
+              <label for="remark" class="layui-form-label">
                   <span class="x-red">*</span>详细信息
               </label>
               <div class="layui-input-inline">
@@ -48,50 +48,34 @@
             
           </div>
           <div class="layui-form-item">
-            <label for="phone" class="layui-form-label">
+            <label for="dept_id" class="layui-form-label">
                 <span class="x-red">*</span>选择部门
             </label>
             <div class="layui-input-inline">
-                <select id="dept_id" name="deptId" class="valid">
+                <select id="dept_id" name="deptId" class="valid" lay-verify="required">
+                    <option value="">请选择所属部门</option>
                   <c:forEach items="${requestScope.dept_list}" var="line" varStatus="stat">
-                  <option value="${line.id}" <c:if test="${job.dept_id == line.id }">selected</c:if>>${line.name}</option>
-                  </c:forEach>
+                    <option value="${line.id}" <c:if test="${job.deptId == line.id }">selected</c:if>>${line.name}</option>
+                </c:forEach>
                 </select>
-            </div>         
+            </div>
         </div>
 
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
               <input type="submit" value=" 提交" class="layui-btn" lay-filter="add" lay-submit=""/>
-                 
+
           </div>
       </form>
     </div>
     <script>
         layui.use(['form','layer'], function(){
             $ = layui.jquery;
-          var form = layui.form
-          ,layer = layui.layer;
-        
-          //自定义验证规则
-          form.verify({
-            nikename: function(value){
-              if(value.length < 5){
-                return '昵称至少得5个字符啊';
-              }
-            }
-            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-            ,repass: function(value){
-                if($('#L_pass').val()!=$('#L_repass').val()){
-                    return '两次密码不一致';
-                }
-            }
-          });
-
+          var form = layui.form,
+          layer = layui.layer;
           //监听提交
           form.on('submit(add)', function(data){
-        	  
             console.log(data);
             //发异步，把数据提交给php
             var id = document.getElementById("id").value;
@@ -114,12 +98,8 @@
                 parent.layer.close(index);
             });
             }
-
-           
             return false;
           });
-          
-          
         });
     </script>
     

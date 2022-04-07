@@ -107,8 +107,8 @@ public class RainServiceImpl implements RainService {
 
   @Override
   public Job get_JobInfo(Integer id) {
-
-    return jobMapper.get_Info(id);
+    Job info = jobMapper.get_Info(id);
+    return info;
   }
 
   @Override

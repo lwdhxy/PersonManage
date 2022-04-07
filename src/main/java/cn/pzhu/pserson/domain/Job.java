@@ -10,10 +10,12 @@ public class Job {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
+  @Column(name = "dept_id")
+  private Integer deptId;
+
   private String name;
 
   private String remark;
 
-  @Column(name = "dept_id")
-  private Integer deptId;
+
 }

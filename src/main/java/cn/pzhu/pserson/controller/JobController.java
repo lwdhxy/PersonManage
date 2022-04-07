@@ -5,6 +5,7 @@ import cn.pzhu.pserson.domain.Job;
 import cn.pzhu.pserson.service.EmployeeService;
 import cn.pzhu.pserson.service.JobService;
 import cn.pzhu.pserson.service.RainService;
+import cn.pzhu.pserson.service.RecruitService;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -30,6 +28,9 @@ public class JobController {
 
   @Autowired
   JobService jobService;
+
+  @Autowired
+  RecruitService recruitService;
 
   // 如果在目录下输入为空，则跳转到指定链接
   @RequestMapping(value = "/job/")
@@ -84,5 +85,12 @@ public class JobController {
     if (id != null) {
       rainservice.delete_JobInfo(id);
     }
+  }
+
+  @ResponseBody
+  @GetMapping("/joblist")
+  public List<Job> getJobList(int id,Model model) {
+    List<Job> list = recruitService.getJobList(id);
+    return list;
   }
 }

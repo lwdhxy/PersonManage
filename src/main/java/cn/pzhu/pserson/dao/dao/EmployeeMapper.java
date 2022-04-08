@@ -59,4 +59,9 @@ public interface EmployeeMapper extends Mapper<Employee> {
   List<EmployeeResDTO> getEmByContent(String content);
 
   List<EmployeeResDTO> getEmployees(@Param("content") String content);
+
+  @Select("SELECT * from employee where loginname = #{loginname} and loginpassword = #{password}")
+  Employee employeeLogin(@Param("loginname") String loginname, @Param("password") String password);
+
+  EmployeeResDTO employeedetails(@Param("id") Integer id);
 }

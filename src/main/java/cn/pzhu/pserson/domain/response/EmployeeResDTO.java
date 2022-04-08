@@ -8,6 +8,8 @@ public class EmployeeResDTO {
   private Integer jobId;
   private Integer deptId;
   private String dept;
+  private String loginname;
+  private String loginpassword;
   private String job;
   private String name;
   private String cardId;

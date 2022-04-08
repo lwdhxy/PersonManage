@@ -14,8 +14,10 @@ public class Constants {
 
   // 登录
   public static final String LOGIN = "loginForm";
-  // 用户的session对象
+  // 管理员的session对象
   public static final String USER_SESSION = "user_session";
+  // 用户的session对象
+  public static final String EMPLOYEE_SESSION = "employee_session";
 
   // 默认每页4条数据
   public static int PAGE_DEFAULT_SIZE = 4;

@@ -37,7 +37,8 @@
             <hr class="hr15">
             <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
             <hr class="hr20" >
-               
+            <input value="切换到用户登录" style="width:100%;" type="button" onclick="location.href='${ctx}/employee/emplogin'">
+
         </form>
     </div>
 </body>

@@ -102,9 +102,12 @@
               <a title="删除" onclick="member_del(this,'${dept.id }')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
+                <a title="重置密码" onclick="updatePassword(this,'${dept.id }')" href="javascript:;">
+                <i class="layui-icon">&#xe643;</i>
+              </a>
             </td>
           </tr>
-				
+
 			</c:forEach>
         
           
@@ -185,13 +188,25 @@
               layer.msg('已删除!',{icon:1,time:1000});
           });
       }
-
+      function updatePassword(obj, id){
+          console.log(id);
+          layer.confirm('确认要重置密码吗？', function (index) {
+            $.ajax({
+                url : '${ctx}/employee/updatePassword',
+                type: "GET",
+                data: "id="+id,
+                success : function (data) {
+                    layer.msg('已重置',{icon:1,time:1000})
+                }
+            })
+          });
+      }
 
 
       function delAll (argument) {
 
         var data = tableCheck.getData();
-  
+
         layer.confirm('确认要删除吗？'+data,function(index){
             //捉到所有被选中的，发异步进行删除
             layer.msg('删除成功', {icon: 1});

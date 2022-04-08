@@ -39,4 +39,7 @@ public class Employee {
     @Column(name = "createDate")
     private String createDate;
 
+    private String loginname;
+    private String loginpassword;
+
 }

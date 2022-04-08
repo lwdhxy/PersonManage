@@ -37,4 +37,18 @@
       </if>
     </where>
   </select>
+
+  <select id="employeedetails" resultType="cn.pzhu.pserson.domain.response.EmployeeResDTO">
+    SELECT
+    e.*, j.`name` AS job,
+    d. NAME AS dept,
+    j.id as jobId,
+    d.id as deptId
+    FROM
+    employee e
+    LEFT JOIN job j ON e.job_id = j.id
+    LEFT JOIN dept d ON e.dept_id = d.id
+    where
+    e.id = #{id}
+  </select>
 </mapper>

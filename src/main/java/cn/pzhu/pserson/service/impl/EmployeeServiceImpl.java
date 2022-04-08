@@ -6,6 +6,7 @@ import cn.pzhu.pserson.dao.dao.JobMapper;
 import cn.pzhu.pserson.domain.Dept;
 import cn.pzhu.pserson.domain.Employee;
 import cn.pzhu.pserson.domain.Job;
+import cn.pzhu.pserson.domain.response.EmployeeResDTO;
 import cn.pzhu.pserson.service.EmployeeService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -52,6 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     Date date = new Date();
     SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd hh:mm:ss");
     employee.setCreateDate(format.format(date));
+    employee.setLoginpassword("0000");
     employeeMapper.insert(employee);
   }
 
@@ -70,5 +72,11 @@ public class EmployeeServiceImpl implements EmployeeService {
   @Override
   public Employee getEmployee(Integer id) {
     return employeeMapper.selectByPrimaryKey(id);
+  }
+
+  @Override
+  public EmployeeResDTO employeedetails(Integer id) {
+
+    return employeeMapper.employeedetails(id);
   }
 }

@@ -347,4 +347,14 @@ public class RainServiceImpl implements RainService {
 
     userMapper.delete_Info(id);
   }
+
+  @Override
+  public void updatePassword(Integer id) {
+    userMapper.updatePassword(id);
+  }
+
+  @Override
+  public Employee employeeLogin(String loginname, String password) {
+    return employeeMapper.employeeLogin(loginname,password);
+  }
 }

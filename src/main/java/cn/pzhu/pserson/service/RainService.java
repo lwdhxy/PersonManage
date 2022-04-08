@@ -96,4 +96,7 @@ public interface RainService {
 
   void delete_UserInfo(Integer id);
 
+    void updatePassword(Integer id);
+
+  Employee employeeLogin(String loginname, String password);
 }

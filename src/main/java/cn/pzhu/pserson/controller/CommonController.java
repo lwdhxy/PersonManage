@@ -26,4 +26,10 @@ public class CommonController {
     String blank = "welcome";
     return blank;
   }
+
+  @RequestMapping(value = "/employee/welcome")
+  public String employeeWelcome() {
+    String blank = "/employee/welcome";
+    return blank;
+  }
 }

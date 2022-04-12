@@ -40,6 +40,7 @@ public class Employee {
     private String createDate;
 
     private String loginname;
+
     private String loginpassword;
 
 }

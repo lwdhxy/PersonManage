@@ -159,4 +159,11 @@ public class EmployeeController {
     return mv;
   }
 
+  @RequestMapping("/employee/hour")
+  public ModelAndView hour(){
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("/employee/hour");
+    return modelAndView;
+  }
+
 }

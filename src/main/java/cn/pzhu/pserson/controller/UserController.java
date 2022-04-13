@@ -7,6 +7,7 @@ import cn.pzhu.pserson.util.Constants;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -45,15 +46,13 @@ public class UserController {
 
   @RequestMapping(value = "/login")
   public ModelAndView login(@RequestParam("loginname") String loginname,
-      @RequestParam("password") String password,
+      @RequestParam("password") String password, @RequestParam("state") String state,
       HttpSession session,
       ModelAndView mv) {
-//    String loginStatus = (String)session.getAttribute("userid");
-//    if (loginStatus != null) {
-//      mv.addObject("message", "该账号已登入");
-//      mv.setViewName("forward:/loginForm");
-//      return mv;
-//    }
+    if("1".equals(state)){
+      mv.setViewName("forward:/employee/login");
+      return mv;
+    }
     User user = rainservice.login(loginname, password);
     if (user != null) {
       session.setAttribute(Constants.USER_SESSION, user);

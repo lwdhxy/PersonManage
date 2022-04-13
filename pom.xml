@@ -144,6 +144,12 @@
       <artifactId>jose4j</artifactId>
       <version>0.5.1</version>
     </dependency>
+    <dependency>
+      <groupId>pinyin4clj</groupId>
+      <artifactId>pinyin4clj</artifactId>
+      <version>0.3.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>

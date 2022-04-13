@@ -29,27 +29,34 @@
 <div class="x-body">
     <form class="layui-form" method="POST" id="deptForm" action="${ctx}/user/add">
         <input type="hidden" name="id" id="id" value="${job.id }">
-        <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>登录名
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="username" name="loginname" required=""
-                       lay-verify="required"
-                       autocomplete="off" class="layui-input" value="${job.loginname }">
-            </div>
-            <div id="repeat"></div>
-        </div>
+<%--        <div class="layui-form-item">--%>
+<%--            <label for="username" class="layui-form-label">--%>
+<%--                <span class="x-red">*</span>登录名--%>
+<%--            </label>--%>
+<%--            <div class="layui-input-inline">--%>
+<%--                <input type="text" id="username" name="loginname" required=""--%>
+<%--                       lay-verify="required"--%>
+<%--                       autocomplete="off" class="layui-input" value="${job.loginname }">--%>
+<%--            </div>--%>
+<%--            <div id="repeat"></div>--%>
+<%--        </div>--%>
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>用户名
             </label>
             <div class="layui-input-inline">
-                <input type="text" name="username" required="" lay-verify="required"
+                <input type="text" id="username" name="username" required="" lay-verify="required"
                        autocomplete="off" class="layui-input" value="${job.username }">
             </div>
-
-
+        </div>
+        <div class="layui-form-item">
+            <label for="phone" class="layui-form-label">
+                <span class="x-red">*</span>联系方式
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="phone" name="phone" required="" lay-verify="required|phone"
+                       autocomplete="off" class="layui-input" value="${job.phone }">
+            </div>
         </div>
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">

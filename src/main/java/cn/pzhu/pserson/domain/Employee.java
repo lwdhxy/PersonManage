@@ -3,6 +3,9 @@ package cn.pzhu.pserson.domain;
 import javax.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Data
 public class Employee {
     @Id
@@ -42,5 +45,8 @@ public class Employee {
     private String loginname;
 
     private String loginpassword;
+    private String basepay;
+    private int updatepayoperator;
+    private LocalDateTime updatepaytime;
 
 }

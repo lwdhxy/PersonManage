@@ -67,6 +67,7 @@
          <th>身份证号码</th>
          <th>部门</th>
          <th>联系地址</th>
+         <th>基础薪资</th>
          <th>建档日期</th>
          <!-- <th>状态</th> -->
             <th>操作</th>
@@ -87,6 +88,7 @@
             <td>${employee.cardId }</td>
             <td>${employee.dept }</td>
             <td>${employee.address }</td>
+            <td>${employee.basepay }</td>
             <td>${employee.createDate }</td>
             <!-- <td disabled="true">${employee.jobId}</td> -->
             <!-- <td disabled="true">${employee.deptId}</td> -->

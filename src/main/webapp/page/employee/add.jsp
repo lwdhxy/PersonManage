@@ -27,6 +27,7 @@
     <div class="x-body">
         <form class="layui-form" method="POST" id="deptForm"  action="${ctx}/employee/add">
         <input type="hidden" name="id" id="id" value="${job.id }" >
+        <input type="hidden" name="loginpassword" id="loginpassword" value="${job.loginpassword }" >
           <div class="layui-form-item" >
               <label for="name" class="layui-form-label">
                   <span class="x-red">*</span>姓名
@@ -97,6 +98,15 @@
               <div class="layui-input-inline">
                   <input type="text" id="address" name="address" required="" lay-verify="required"
                   autocomplete="off" class="layui-input" value="${job.address }">
+              </div>
+          </div>
+            <div class="layui-form-item">
+              <label for="basepay" class="layui-form-label">
+                  <span class="x-red">*</span>基础薪资
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="basepay" name="basepay" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="${job.basepay }">
               </div>
           </div>
             <div class="layui-form-item">

@@ -66,6 +66,7 @@
          <th>身份证号码</th>
          <th>部门</th>
          <th>联系地址</th>
+         <th>基础薪资</th>
          <th>建档日期</th>
          <!-- <th>状态</th> -->
             <th>操作</th>
@@ -85,6 +86,7 @@
             <td>${dept.cardId }</td>
             <td>${dept.dept }</td>
             <td>${dept.address }</td>
+            <td>${dept.basepay }</td>
             <td>${dept.createDate }</td>
             <!-- <td disabled="true">${dept.jobId}</td> -->
             <!-- <td disabled="true">${dept.deptId}</td> -->
@@ -201,7 +203,6 @@
             })
           });
       }
-
 
       function delAll (argument) {
 

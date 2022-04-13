@@ -10,6 +10,7 @@ public class EmployeeResDTO {
   private String dept;
   private String loginname;
   private String loginpassword;
+  private String basepay;
   private String job;
   private String name;
   private String cardId;

@@ -23,7 +23,7 @@
 <body class="login-bg">
     
     <div class="login layui-anim layui-anim-up">
-        <div class="message">人事管理系统登陆</div>
+        <div class="message">人事信息管理系统登陆</div>
         <div id="darkbannerwrap"></div>
         ${requestScope.message}
         <form method="post" class="layui-form" action="${ctx}/login">
@@ -37,8 +37,8 @@
             <hr class="hr15">
             <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
             <hr class="hr20" >
-            <input value="切换到用户登录" style="width:100%;" type="button" onclick="location.href='${ctx}/employee/emplogin'">
-
+            <input value="1"  type="radio" title="员工" name="state" checked="checked">
+            <input value="0"  type="radio" title="管理员" name="state">
         </form>
     </div>
 </body>

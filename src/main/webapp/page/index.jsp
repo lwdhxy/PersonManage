@@ -136,27 +136,27 @@
                 </ul>
             </li>
 
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe726;</i>
-                    <cite>招聘管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="${ctx }/recruit/list?pageNum=1&pageSize=6">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>招聘列表</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="${ctx }/recruit/toadd">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>招聘需求</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
+<%--            <li>--%>
+<%--                <a href="javascript:;">--%>
+<%--                    <i class="iconfont">&#xe726;</i>--%>
+<%--                    <cite>招聘管理</cite>--%>
+<%--                    <i class="iconfont nav_right">&#xe697;</i>--%>
+<%--                </a>--%>
+<%--                <ul class="sub-menu">--%>
+<%--                    <li>--%>
+<%--                        <a _href="${ctx }/recruit/list?pageNum=1&pageSize=6">--%>
+<%--                            <i class="iconfont">&#xe6a7;</i>--%>
+<%--                            <cite>招聘列表</cite>--%>
+<%--                        </a>--%>
+<%--                    </li >--%>
+<%--                    <li>--%>
+<%--                        <a _href="${ctx }/recruit/toadd">--%>
+<%--                            <i class="iconfont">&#xe6a7;</i>--%>
+<%--                            <cite>招聘需求</cite>--%>
+<%--                        </a>--%>
+<%--                    </li >--%>
+<%--                </ul>--%>
+<%--            </li>--%>
 
             <li>
                 <a href="javascript:;">
@@ -203,21 +203,21 @@
                 </ul>
             </li>
 
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6b4;</i>
-                    <cite>聊天室</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="${ctx }/chat/chat">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>聊天</cite>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+<%--            <li>--%>
+<%--                <a href="javascript:;">--%>
+<%--                    <i class="iconfont">&#xe6b4;</i>--%>
+<%--                    <cite>聊天室</cite>--%>
+<%--                    <i class="iconfont nav_right">&#xe697;</i>--%>
+<%--                </a>--%>
+<%--                <ul class="sub-menu">--%>
+<%--                    <li>--%>
+<%--                        <a _href="${ctx }/chat/chat">--%>
+<%--                            <i class="iconfont">&#xe6a7;</i>--%>
+<%--                            <cite>聊天</cite>--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
+<%--                </ul>--%>
+<%--            </li>--%>
         </ul>
       </div>
     </div>

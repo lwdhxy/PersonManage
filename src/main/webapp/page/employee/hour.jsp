@@ -25,7 +25,7 @@
   
   <body>
     <div class="x-body">
-        <form class="layui-form" method="POST" id="deptForm"  action="${ctx}/employee/hour">
+        <form class="layui-form" method="POST" id="deptForm"  action="${ctx}/employee/inhour">
           <div class="layui-form-item" >
               <label for="worknumber" class="layui-form-label">
                   <span class="x-red">*</span>工时

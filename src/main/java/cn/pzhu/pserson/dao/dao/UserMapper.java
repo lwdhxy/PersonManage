@@ -43,4 +43,7 @@ public interface UserMapper extends Mapper<User> {
 
   @Update("UPDATE employee set loginpassword = '0000' where id = #{id}")
   void updatePassword(Integer id);
+
+  @Select("select count(*) from user where loginname like CONCAT(#{loginname},'%')")
+    int selectByName(String loginname);
 }

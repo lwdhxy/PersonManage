@@ -2,8 +2,10 @@ package cn.pzhu.pserson.controller;
 
 import cn.pzhu.pserson.domain.Dept;
 import cn.pzhu.pserson.domain.Employee;
+import cn.pzhu.pserson.domain.Hour;
 import cn.pzhu.pserson.domain.Job;
 import cn.pzhu.pserson.domain.response.EmployeeResDTO;
+import cn.pzhu.pserson.domain.response.HourResDto;
 import cn.pzhu.pserson.service.EmployeeService;
 import cn.pzhu.pserson.service.RainService;
 import cn.pzhu.pserson.service.RecruitService;
@@ -112,16 +114,9 @@ public class EmployeeController {
       mv.setViewName("employee/index");
     } else {
       mv.addObject("message", "登录名或密码错误!请重新输入");
-      mv.setViewName("employee/loginForm");
+      mv.setViewName("forward:/loginForm");
     }
     return mv;
-  }
-
-  @RequestMapping(value = "/employee/emplogin", method = RequestMethod.GET)
-  public ModelAndView index() {
-    ModelAndView modelAndView = new ModelAndView();
-    modelAndView.setViewName("employee/loginForm");
-    return modelAndView;
   }
 
   @RequestMapping("/employee/employeedetails")
@@ -148,7 +143,7 @@ public class EmployeeController {
     session.removeAttribute(Constants.EMPLOYEE_SESSION);  //删除这个Session
     session.removeAttribute("userid");
     ModelAndView modelAndView = new ModelAndView();
-    modelAndView.setViewName("/employee/loginForm");
+    modelAndView.setViewName("forward:/loginForm");
     return modelAndView;
   }
 
@@ -163,6 +158,24 @@ public class EmployeeController {
   public ModelAndView hour(){
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("/employee/hour");
+    return modelAndView;
+  }
+  @RequestMapping("/employee/hourList")
+  public ModelAndView hourList(HttpSession session){
+    int userid = (int) session.getAttribute("userid");
+    HourResDto hourlist = employeeService.hourList(userid);
+
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("hourlist", hourlist);
+    modelAndView.setViewName("/employee/hourList");
+    return modelAndView;
+  }
+
+  @RequestMapping("/employee/inhour")
+  public ModelAndView inhour(@RequestBody Hour hour,HttpSession session){
+    employeeService.inhour(hour, (Integer) session.getAttribute("userid"));
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("forward:/employee/hourList");
     return modelAndView;
   }
 

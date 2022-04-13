@@ -2,21 +2,29 @@ package cn.pzhu.pserson.service.impl;
 
 import cn.pzhu.pserson.dao.dao.DeptMapper;
 import cn.pzhu.pserson.dao.dao.EmployeeMapper;
+import cn.pzhu.pserson.dao.dao.HourMapper;
 import cn.pzhu.pserson.dao.dao.JobMapper;
 import cn.pzhu.pserson.domain.Dept;
 import cn.pzhu.pserson.domain.Employee;
+import cn.pzhu.pserson.domain.Hour;
 import cn.pzhu.pserson.domain.Job;
 import cn.pzhu.pserson.domain.response.EmployeeResDTO;
+import cn.pzhu.pserson.domain.response.HourResDto;
 import cn.pzhu.pserson.service.EmployeeService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -30,6 +38,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Resource
   EmployeeMapper employeeMapper;
+  @Resource
+  HourMapper hourMapper;
 
   @Override
   public Map<String, Object> getInfo() {
@@ -59,6 +69,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public void update(Employee employee) {
+    Employee employee1 = employeeMapper.selectByPrimaryKey(employee.getId());
+    if(!employee1.getBasepay().equals("")){
+      if(employee1.getBasepay() != employee.getBasepay()){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        int userid = (int) request.getSession().getAttribute("userid");
+        employee.setUpdatepayoperator(userid);
+        employee.setUpdatepaytime(LocalDateTime.now());
+      }
+    }
     employeeMapper.updateByPrimaryKey(employee);
   }
 
@@ -79,4 +98,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     return employeeMapper.employeedetails(id);
   }
+
+  @Override
+  public void inhour(Hour hour, int userid) {
+    hour.setEmpid(userid);
+    hour.setWorktime(LocalDateTime.now());
+    hour.setCreatetime(LocalDateTime.now());
+    hour.setState("submitted");
+    hourMapper.insert(hour);
+  }
+
+  @Override
+  public HourResDto hourList(int userid) {
+    return hourMapper.selectKey(userid);
+  }
+
+
 }

@@ -61,6 +61,7 @@
             <th>ID</th>
             <th>登录名</th>
             <th>用户名</th>
+            <th>联系方式</th>
             <th>注册日期</th>
             <th>LEVEL</th>
             <th>操作</th>
@@ -74,6 +75,7 @@
             <td>${dept.id}</td>
             <td>${dept.loginname }</td>
             <td>${dept.username }</td>
+            <td>${dept.phone }</td>
             <td>${dept.createdate }</td>
             <td>${dept.level == 1 ? "人事"  : "主管"}</td>
         

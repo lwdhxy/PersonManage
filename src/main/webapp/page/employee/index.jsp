@@ -58,31 +58,86 @@
                             <cite>个人信息</cite>
                         </a>
                     </li >
+
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6ce;</i>
+                    <cite>个人工时</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="${ctx }/employee/hourList">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>查看工时</cite>
+                        </a>
+                    </li >
                     <li>
                         <a _href="${ctx }/employee/hour">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>个人工时</cite>
                         </a>
                     </li >
-
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6ce;</i>
+                    <cite>请假管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
                     <li>
-                        <a _href="${ctx }/employee/add">
+                        <a _href="${ctx }/employee/hour">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>查看请假信息</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="${ctx }/employee/hour">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>请假申请</cite>
                         </a>
-                    </li>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6ce;</i>
+                    <cite>加班管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
                     <li>
-                        <a _href="${ctx }/employee/add">
+                        <a _href="${ctx }/employee/hour">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>查看加班信息</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="${ctx }/employee/hour">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>加班申请</cite>
                         </a>
-                    </li>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6ce;</i>
+                    <cite>薪资管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
                     <li>
-                        <a _href="${ctx }/employee/add">
+                        <a _href="${ctx }/employee/hour">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>薪资情况</cite>
+                            <cite>查看薪资信息</cite>
                         </a>
-                    </li>
+                    </li >
                 </ul>
             </li>
 
@@ -118,21 +173,21 @@
                 </ul>
             </li>
 
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6b4;</i>
-                    <cite>聊天室</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="${ctx }/chat/chat">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>聊天</cite>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+<%--            <li>--%>
+<%--                <a href="javascript:;">--%>
+<%--                    <i class="iconfont">&#xe6b4;</i>--%>
+<%--                    <cite>聊天室</cite>--%>
+<%--                    <i class="iconfont nav_right">&#xe697;</i>--%>
+<%--                </a>--%>
+<%--                <ul class="sub-menu">--%>
+<%--                    <li>--%>
+<%--                        <a _href="${ctx }/chat/chat">--%>
+<%--                            <i class="iconfont">&#xe6a7;</i>--%>
+<%--                            <cite>聊天</cite>--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
+<%--                </ul>--%>
+<%--            </li>--%>
         </ul>
       </div>
     </div>

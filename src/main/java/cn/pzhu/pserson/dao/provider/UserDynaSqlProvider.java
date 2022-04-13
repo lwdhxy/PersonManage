@@ -45,6 +45,12 @@ public class UserDynaSqlProvider {
 						if(job.getUsername()!=null){
 							SET("username = #{username}");
 						}
+						if(job.getPhone()!=null){
+							SET("phone = #{phone}");
+						}
+						if(job.getLevel()!=null){
+							SET("level = #{level}");
+						}
 				
 						
 						

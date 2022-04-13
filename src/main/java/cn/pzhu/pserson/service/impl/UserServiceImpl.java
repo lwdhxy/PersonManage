@@ -8,7 +8,11 @@ import cn.pzhu.pserson.util.DateFormate;
 import cn.pzhu.pserson.util.MD5Util;
 import java.util.Date;
 import javax.annotation.Resource;
+
+import cn.pzhu.pserson.util.PinyinUtil;
+
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,6 +34,12 @@ public class UserServiceImpl implements UserService {
   public void insertUser(User user) {
     user.setPassword(MD5Util.crypt(user.getPassword()));
     user.setCreatedate(DateFormate.dateToString(new Date()));
+    String loginname = PinyinUtil.getLoginname(user.getUsername());
+    int count = userMapper.selectByName(loginname);
+    if(count != 0){
+      loginname += ("0"+count);
+    }
+    user.setLoginname(loginname);
     userMapper.insert(user);
   }
 

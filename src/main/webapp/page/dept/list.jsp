@@ -27,9 +27,9 @@
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">演示</a>
+
         <a>
-          <cite>导航元素</cite></a>
+          <cite>部门列表</cite></a>
       </span>
       <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="../dept/list?pageNum=${pageInfo.pageNum}&pageSize=6" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
@@ -84,8 +84,8 @@
                 <i class="layui-icon">&#xe601;</i>
               </a> -->
               <c:if test="${user_session.level=='0'}">
-              <a title="编辑"  onclick="x_admin_show('编辑','${ctx}/dept/add?id=${dept.id }');" href="javascript:;">
-             
+              <a title="编辑"  href="${ctx}/dept/add?id=${dept.id }" >
+
                 <i class="layui-icon">&#xe642;</i>
               </a>
               
@@ -134,29 +134,6 @@
         });
       });
 
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
-
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
-              }
-              
-          });
-      }
 
       /*用户-删除*/
       function member_del(obj,id){

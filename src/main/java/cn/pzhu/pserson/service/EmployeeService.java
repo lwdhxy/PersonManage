@@ -5,6 +5,8 @@ import cn.pzhu.pserson.domain.Hour;
 import cn.pzhu.pserson.domain.response.EmployeeResDTO;
 import cn.pzhu.pserson.domain.response.HourResDto;
 import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 import java.util.Map;
 
 public interface EmployeeService {
@@ -25,6 +27,6 @@ public interface EmployeeService {
 
     void inhour(Hour hour, int userid);
 
-  HourResDto hourList(int userid);
+  List<HourResDto> hourList(int userid, String worktime);
 
 }

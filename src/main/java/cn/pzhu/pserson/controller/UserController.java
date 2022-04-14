@@ -43,7 +43,7 @@ public class UserController {
     modelAndView.setViewName("loginForm");
     return modelAndView;
   }
-
+//登录
   @RequestMapping(value = "/login")
   public ModelAndView login(@RequestParam("loginname") String loginname,
       @RequestParam("password") String password, @RequestParam("state") String state,
@@ -73,7 +73,7 @@ public class UserController {
     String blank = "/user/list";
     return blank;
   }
-
+//用户列表
   @RequestMapping(value = "/user/list", method = RequestMethod.GET)
   public String index(Model model, String content, int pageNum, int pageSize) {
     Map<String, Object> map = null;
@@ -92,7 +92,7 @@ public class UserController {
     model.addAttribute("nums", size / pageSize + 1);
     return "user/list";
   }
-
+//跳转到新增页面
   @RequestMapping(value = "/user/add", method = RequestMethod.GET)
   public String add(Model model, Integer id) {
     if (id != null) {
@@ -105,7 +105,7 @@ public class UserController {
 
   @RequestMapping(value = "/user/add", method = RequestMethod.POST)
   public ModelAndView add(ModelAndView mv, @ModelAttribute User notice, Integer id) {
-    System.out.println(id);
+    //System.out.println(id);
     if (id != null) {
       rainservice.update_UserInfo(notice);
       mv.getModel().remove("update");
@@ -138,4 +138,15 @@ public class UserController {
     return userService.repeatName(name);
   }
 
+  @RequestMapping("/user/hourList")
+  public String hourList(Model model, String content, int pageNum, int pageSize){
+    /// TODO: 2022/4/14
+    return "/user/hourList";
+  }
+  //查看详细工时
+  @RequestMapping("/user/selecthour")
+  public String selecthour(Model model, String content){
+    /// TODO: 2022/4/14
+    return "/user/houradd";
+  }
 }

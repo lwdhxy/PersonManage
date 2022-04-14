@@ -51,9 +51,7 @@ public class UserDynaSqlProvider {
 						if(job.getLevel()!=null){
 							SET("level = #{level}");
 						}
-				
-						
-						
+
 						WHERE(" id = #{id} ");
 					}
 				}.toString();

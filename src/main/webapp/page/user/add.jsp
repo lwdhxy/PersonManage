@@ -29,17 +29,7 @@
 <div class="x-body">
     <form class="layui-form" method="POST" id="deptForm" action="${ctx}/user/add">
         <input type="hidden" name="id" id="id" value="${job.id }">
-<%--        <div class="layui-form-item">--%>
-<%--            <label for="username" class="layui-form-label">--%>
-<%--                <span class="x-red">*</span>登录名--%>
-<%--            </label>--%>
-<%--            <div class="layui-input-inline">--%>
-<%--                <input type="text" id="username" name="loginname" required=""--%>
-<%--                       lay-verify="required"--%>
-<%--                       autocomplete="off" class="layui-input" value="${job.loginname }">--%>
-<%--            </div>--%>
-<%--            <div id="repeat"></div>--%>
-<%--        </div>--%>
+
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>用户名
@@ -74,8 +64,8 @@
             </label>
             <div class="layui-input-inline">
                 <select name="level" lay-verify="required" lay-search="">
-                    <option value="1">人事</option>
                     <option value="0">主管</option>
+                    <option value="1">人事</option>
                 </select>
             </div>
         </div>
@@ -99,24 +89,8 @@
     var form = layui.form
         , layer = layui.layer;
 
-    //自定义验证规则
-    form.verify({
-      nikename: function (value) {
-        if (value.length < 5) {
-          return '昵称至少得5个字符啊';
-        }
-      }
-      , pass: [/(.+){6,12}$/, '密码必须6到12位']
-      , repass: function (value) {
-        if ($('#L_pass').val() != $('#L_repass').val()) {
-          return '两次密码不一致';
-        }
-      }
-    });
-
     //监听提交
     form.on('submit(add)', function (data) {
-
 
       // console.log(document.getElementById("update").innerText);
       //发异步，把数据提交
@@ -149,27 +123,6 @@
 
   });
 
-</script>
-
-<script type="text/javascript">
-  $("#username").mouseout(function () {
-    $.ajax({
-      type: "GET",
-      url: "./repeat",
-      data: {
-        name: document.getElementById("username").value
-      },
-      success: function (data) {
-        if (data == 1) {
-          document.getElementById("repeat").innerHTML = "登陆名已经重复,请修改"
-          $("#btn1").attr('disabled', true);
-        } else {
-          document.getElementById("repeat").innerHTML = "✓"
-          $("#btn1").attr('disabled', false);
-        }
-      }
-    });
-  });
 </script>
 
 <script

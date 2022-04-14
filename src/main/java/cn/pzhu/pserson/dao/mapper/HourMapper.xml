@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.pzhu.pserson.dao.dao.HourMapper" >
+
+  <select id="selectKey" resultType="cn.pzhu.pserson.domain.response.HourResDto">
+    select a.*,
+           c.name,
+           b.username
+    from hour a
+        left join user b on a.stateoperator= b.id
+        left join employee c on a.empid = c.id
+    where a.id= #{userid}
+    <if test="worktime != null and worktime != ''">
+        and a.worktime = #{worktime}
+    </if>
+  </select>
+</mapper>

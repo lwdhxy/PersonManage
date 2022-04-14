@@ -4,13 +4,11 @@ import cn.pzhu.pserson.dao.dao.DeptMapper;
 import cn.pzhu.pserson.dao.dao.EmployeeMapper;
 import cn.pzhu.pserson.dao.dao.HourMapper;
 import cn.pzhu.pserson.dao.dao.JobMapper;
-import cn.pzhu.pserson.domain.Dept;
-import cn.pzhu.pserson.domain.Employee;
-import cn.pzhu.pserson.domain.Hour;
-import cn.pzhu.pserson.domain.Job;
+import cn.pzhu.pserson.domain.*;
 import cn.pzhu.pserson.domain.response.EmployeeResDTO;
 import cn.pzhu.pserson.domain.response.HourResDto;
 import cn.pzhu.pserson.service.EmployeeService;
+import cn.pzhu.pserson.util.PinyinUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import java.text.SimpleDateFormat;
@@ -64,7 +62,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd hh:mm:ss");
     employee.setCreateDate(format.format(date));
     employee.setLoginpassword("0000");
+    employee.setLoginname(getname(employee.getName()));
     employeeMapper.insert(employee);
+  }
+  private String getname(String user) {
+    String loginname = PinyinUtil.getLoginname(user);
+    int count = employeeMapper.selectByName(loginname);
+    if(count != 0){
+      loginname += ("0"+count);
+    }
+    return loginname;
   }
 
   @Override
@@ -102,15 +109,14 @@ public class EmployeeServiceImpl implements EmployeeService {
   @Override
   public void inhour(Hour hour, int userid) {
     hour.setEmpid(userid);
-    hour.setWorktime(LocalDateTime.now());
     hour.setCreatetime(LocalDateTime.now());
     hour.setState("submitted");
     hourMapper.insert(hour);
   }
 
   @Override
-  public HourResDto hourList(int userid) {
-    return hourMapper.selectKey(userid);
+  public List<HourResDto> hourList(int userid, String worktime) {
+    return hourMapper.selectKey(userid, worktime);
   }
 
 

@@ -69,14 +69,11 @@ public class DeptController {
     if (id != null) {
       rainservice.update_Info(dept);
       System.out.println(dept.getId());
-      mv.addObject("message", "更新成功");
     } else {
       rainservice.addDept(dept);
-      mv.addObject("message", "新增成功");
     }
 //		System.out.println(dept.getName());
-
-    mv.setViewName("/dept/add");
+    mv.setViewName("redirect:/dept/list?pageNum=1&pageSize=6");
     return mv;
   }
 

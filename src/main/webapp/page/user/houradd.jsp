@@ -23,7 +23,6 @@
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-
   <script type="text/javascript">
       laydate.render({
           elem: '#test3'
@@ -65,40 +64,49 @@
 
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
-              <input type="submit" value=" 提交" class="layui-btn" lay-filter="add" lay-submit=""/>
               </label>
+              <td class="td-manage">
+                  <%-- <a title="编辑"  onclick="x_admin_show('编辑','${ctx}/job/add?id=${dept.id }');" href="javascript:;"> --%>
+
+                  <a title="通过"  href="${ctx}/user/add?id=${dept.id }">
+                      <i class="layui-icon">&#xe642;</i>
+                  </a>
+                  <a title="驳回" onclick="member_del(this,'${dept.id }')" href="javascript:;">
+                      <i class="layui-icon">&#xe640;</i>
+                  </a>
+              </td>
 
           </div>
       </form>
     </div>
     <script>
-        layui.use('laydate', function(){
-            var laydate = layui.laydate;
-
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#worktime' //指定元素
-                ,type: 'month'
-            });
-        });
-        layui.use(['form','layer'], function() {
+        layui.use(['form','layer'], function(){
             $ = layui.jquery;
-            var form = layui.form
-                , layer = layui.layer;
+          var form = layui.form
+          ,layer = layui.layer;
 
-            //监听提交
-            form.on('submit(add)', function (data) {
-                //自定义验证规则
-                form.verify({
-                    worknumber: function (value) {
-                        console.log(value);
-                        if (value > 40) {
-                            return '工时不能大于40个小时';
-                        }
-                    }
-                });
+          //监听提交
+          form.on('submit(add)', function(data){
+              //自定义验证规则
+              form.verify({
+                  worknumber: function(value){
+                      console.log(value);
+                      if(value > 40){
+                          return '工时不能大于40个小时';
+                      }
+                  }
+              });
+              layer.alert("提交成功", {icon: 6},function () {
+            	document.getElementById('deptForm').submit();
+                // 获得frame索引
+                var index = parent.layer.getFrameIndex(window.name);
+                //关闭当前frame
+                parent.layer.close(index);
             });
-
+            console.log(data);
+            //发异步，把数据提交给php
+            return false;
+          });
         });
     </script>
     

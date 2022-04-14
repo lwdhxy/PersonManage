@@ -77,7 +77,7 @@
           //监听提交
           form.on('submit(add)', function(data){
             console.log(data);
-            //发异步，把数据提交给php
+            //发异步，把数据提交给
             var id = document.getElementById("id").value;
             console.log(id);
             if (id === null || id === '') {

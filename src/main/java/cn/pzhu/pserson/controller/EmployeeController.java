@@ -8,7 +8,6 @@ import cn.pzhu.pserson.domain.response.EmployeeResDTO;
 import cn.pzhu.pserson.domain.response.HourResDto;
 import cn.pzhu.pserson.service.EmployeeService;
 import cn.pzhu.pserson.service.RainService;
-import cn.pzhu.pserson.service.RecruitService;
 import cn.pzhu.pserson.service.UserService;
 import cn.pzhu.pserson.util.Constants;
 import com.github.pagehelper.PageInfo;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 @Controller
 public class EmployeeController {
@@ -160,10 +158,11 @@ public class EmployeeController {
     modelAndView.setViewName("/employee/hour");
     return modelAndView;
   }
+
   @RequestMapping("/employee/hourList")
-  public ModelAndView hourList(HttpSession session){
+  public ModelAndView hourList(String worktime, HttpSession session){
     int userid = (int) session.getAttribute("userid");
-    HourResDto hourlist = employeeService.hourList(userid);
+    List<HourResDto> hourlist = employeeService.hourList(userid, worktime);
 
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.addObject("hourlist", hourlist);
@@ -172,7 +171,7 @@ public class EmployeeController {
   }
 
   @RequestMapping("/employee/inhour")
-  public ModelAndView inhour(@RequestBody Hour hour,HttpSession session){
+  public ModelAndView inhour(@ModelAttribute Hour hour,HttpSession session){
     employeeService.inhour(hour, (Integer) session.getAttribute("userid"));
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("forward:/employee/hourList");

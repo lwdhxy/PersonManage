@@ -34,13 +34,18 @@ public class UserServiceImpl implements UserService {
   public void insertUser(User user) {
     user.setPassword(MD5Util.crypt(user.getPassword()));
     user.setCreatedate(DateFormate.dateToString(new Date()));
+
+    user.setLoginname(getname(user));
+    userMapper.insert(user);
+  }
+
+  private String getname(User user) {
     String loginname = PinyinUtil.getLoginname(user.getUsername());
     int count = userMapper.selectByName(loginname);
     if(count != 0){
       loginname += ("0"+count);
     }
-    user.setLoginname(loginname);
-    userMapper.insert(user);
+    return loginname;
   }
 
   @Override

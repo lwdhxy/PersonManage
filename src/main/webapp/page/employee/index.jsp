@@ -78,7 +78,7 @@
                     <li>
                         <a _href="${ctx }/employee/hour">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>个人工时</cite>
+                            <cite>工时填报</cite>
                         </a>
                     </li >
                 </ul>

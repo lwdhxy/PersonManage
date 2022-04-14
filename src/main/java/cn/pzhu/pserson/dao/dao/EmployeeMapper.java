@@ -64,4 +64,7 @@ public interface EmployeeMapper extends Mapper<Employee> {
   Employee employeeLogin(@Param("loginname") String loginname, @Param("password") String password);
 
   EmployeeResDTO employeedetails(@Param("id") Integer id);
+
+  @Select("select count(*) from employee where loginname like CONCAT(#{loginname},'%')")
+    int selectByName(@Param("loginname") String loginname);
 }

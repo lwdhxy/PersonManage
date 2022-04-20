@@ -1,20 +1,22 @@
 package cn.pzhu.pserson.config;
 
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.fasterxml.jackson.databind.util.Converter;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 //@Configuration
 //@EnableWebMvc
 //@ComponentScan
 @Controller
-public class MvcConfiguration {
-
+public class MvcConfiguration implements Converter<String, Date> {
+  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 //  @Bean
 //  public InternalResourceViewResolver viewResolver() {
 //
@@ -28,5 +30,32 @@ public class MvcConfiguration {
   @Bean
   public ServerEndpointExporter serverEndpointExporter(){
     return new ServerEndpointExporter();
+  }
+
+
+  @Override
+  public Date convert(String s) {
+    if (s!=null&&!"".equals(s)){
+
+        //解析参数
+      Date date= null;
+      try {
+        date = sdf.parse(s);
+      } catch (ParseException e) {
+        e.printStackTrace();
+      }
+      return date;
+    }
+    return null;
+  }
+
+  @Override
+  public JavaType getInputType(TypeFactory typeFactory) {
+    return null;
+  }
+
+  @Override
+  public JavaType getOutputType(TypeFactory typeFactory) {
+    return null;
   }
 }

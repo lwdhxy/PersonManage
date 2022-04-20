@@ -6,7 +6,7 @@
   
   <head>
     <meta charset="UTF-8">
-    <title>添加工时</title>
+    <title>请假申请</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -23,36 +23,37 @@
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  
+
   <body>
     <div class="x-body">
-        <form class="layui-form" method="POST" id="deptForm"  action="${ctx}/employee/inhour">
+        <form class="layui-form" method="POST" id="deptForm"  action="${ctx}/employee/insertholiday">
+            <input type="hidden" id="sort" name="sort" value="qingjia">
             <input type="hidden" id="id" name="id" value="${dept.id}">
           <div class="layui-form-item" >
-              <label for="worktime" class="layui-form-label">
-                  <span class="x-red">*</span>工时日期
+              <label for="begintime" class="layui-form-label">
+                  <span class="x-red">*</span>请假日期
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="worktime" name="worktime" lay-verify="required"
-                  class="layui-input" placeholder="yyyy-MM-dd" value="${dept.worktime}">
+                  <input type="text" id="begintime" name="begintime" lay-verify="required"
+                  class="layui-input" placeholder="yyyy-MM-dd" value="${dept.begintime}">
               </div>
           </div>
             <div class="layui-form-item" >
-              <label for="worknumber" class="layui-form-label">
-                  <span class="x-red">*</span>工时
+              <label for="duration" class="layui-form-label">
+                  <span class="x-red">*</span>请假时长
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="worknumber" name="worknumber" required="" lay-verify="required|number"
-                  autocomplete="off" class="layui-input" placeholder="请输入工时" value="${dept.worknumber}" onblur="value=zhzs(this)">
+                  <input type="number" id="duration" name="duration" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" placeholder="请输入请假时长" value="${dept.duration}"  onblur="value=zhzs(this)">
               </div>
           </div>
             <div class="layui-form-item" >
-              <label for="workcontent" class="layui-form-label">
-                  <span class="x-red">*</span>日志
+              <label for="cause" class="layui-form-label">
+                  <span class="x-red">*</span>原因
               </label>
               <div class="layui-input-inline">
-                  <textarea rows="30" cols="20" type="" id="workcontent" name="workcontent" required="" lay-verify="required"
-                            autocomplete="off" class="layui-input" placeholder="请输入工作内容">${dept.workcontent}</textarea>
+                  <textarea rows="30" cols="20" type="" id="cause" name="cause" required="" lay-verify="required"
+                            autocomplete="off" class="layui-input" placeholder="请输入请假原因">${dept.cause}</textarea>
               </div>
           </div>
 
@@ -64,6 +65,7 @@
           </div>
       </form>
     </div>
+
     <script type="text/javascript">
         function zhzs(value) {
             var pattern = /^[0-8]?$/
@@ -82,7 +84,7 @@
 
             //执行一个laydate实例
             laydate.render({
-                elem: '#worktime' //指定元素
+                elem: '#begintime' //指定元素
                 ,type: 'date'
             });
         });
@@ -91,6 +93,18 @@
             var form = layui.form
                 , layer = layui.layer;
 
+            //监听提交
+            form.on('submit(add)', function (data) {
+                //自定义验证规则
+                form.verify({
+                    worknumber: function (value) {
+                        console.log(value);
+                        if (value > 40) {
+                            return '工时不能大于40个小时';
+                        }
+                    }
+                });
+            });
         });
     </script>
     

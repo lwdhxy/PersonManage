@@ -60,16 +60,13 @@
             $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
-
             form.on('submit(register)', function(data){
-                $.post('${ctx}/dept/add',data.field,function(message){
-                    layer.alert(message);
+                $.post('${ctx}/dept/add',dat,function(message){
+                    layer.msg(message);
                 });
                 return false;
+
             });
-
-
-
         });
     </script>
     

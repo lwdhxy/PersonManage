@@ -65,7 +65,7 @@ public class DeptController {
   @RequestMapping(value = "/dept/add", method = RequestMethod.POST)
   public ModelAndView add(ModelAndView mv, @ModelAttribute Dept dept, Integer id) {
     System.out.println(id);
-//		System.out.println(dept.getId());
+		System.out.println(dept.getId());
     if (id != null) {
       rainservice.update_Info(dept);
       System.out.println(dept.getId());
@@ -73,6 +73,9 @@ public class DeptController {
       rainservice.addDept(dept);
     }
 //		System.out.println(dept.getName());
+//    System.out.println(dept);
+//
+//    mv.setViewName("/dept/add");
     mv.setViewName("redirect:/dept/list?pageNum=1&pageSize=6");
     return mv;
   }

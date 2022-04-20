@@ -1,26 +1,32 @@
 package cn.pzhu.pserson.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Hour {
-    private int id;
-    private int empid;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name="empid")
+    private Integer empid;
+
     private String worktime;
-    private int worknumber;
+
+    @Column(name="worknumber")
+    private Integer worknumber;
+
     private String workcontent;
     //已提交、审批通过、审批退回
     private String state;
-    private int stateoperator;
+    private Integer stateoperator;
     private LocalDateTime statetime;
     private LocalDateTime createtime;
 }

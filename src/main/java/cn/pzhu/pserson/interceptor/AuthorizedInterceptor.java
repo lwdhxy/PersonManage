@@ -1,5 +1,6 @@
 package cn.pzhu.pserson.interceptor;
 
+import cn.pzhu.pserson.domain.Employee;
 import cn.pzhu.pserson.domain.User;
 import cn.pzhu.pserson.util.Constants;
 import javax.servlet.http.HttpServletRequest;
@@ -63,8 +64,9 @@ public class AuthorizedInterceptor implements HandlerInterceptor {
         if (!flag){
 //        	* 1.获取session中的用户
         	User user = (User) request.getSession().getAttribute(Constants.USER_SESSION);
+        	Employee employee = (Employee) request.getSession().getAttribute(Constants.EMPLOYEE_SESSION);
 //        	* 2.判断用户是否已经登录
-        	if(user == null){
+        	if(user == null && employee == null){
 //        		 * 如果用户没有登录，跳转到登录页面
         		request.setAttribute("message", "请先登录再访问网站!");
         		request.getRequestDispatcher(Constants.LOGIN).forward(request, response);

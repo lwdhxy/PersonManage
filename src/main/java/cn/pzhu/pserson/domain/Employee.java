@@ -3,6 +3,7 @@ package cn.pzhu.pserson.domain;
 import javax.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -45,7 +46,7 @@ public class Employee {
     private String loginname;
 
     private String loginpassword;
-    private String basepay;
+    private BigDecimal basepay;
     private int updatepayoperator;
     private LocalDateTime updatepaytime;
 

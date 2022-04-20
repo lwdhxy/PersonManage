@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.pzhu.pserson.dao.dao.HolidayMapper" >
+
+  <select id="holidayList" resultType="cn.pzhu.pserson.domain.response.HolidayResDto">
+    select a.id,
+           a.empid,
+           a.sort,
+           a.begintime,
+           a.duration,
+           d.name state,
+           a.cause,
+           a.stateoperator,
+           a.statetime,
+           a.createtime,
+           c.name empname,
+           b.username name
+    from holiday a
+        left join user b on a.stateoperator= b.id
+        left join employee c on a.empid = c.id
+        left join state d on a.state = d.id
+    where a.empid= #{userid} and sort = 'qingjia'
+    <if test="content != null and content != ''">
+        and a.begintime = #{content}
+    </if>
+    ORDER BY a.createtime DESC
+  </select>
+
+  <select id="overtimeList" resultType="cn.pzhu.pserson.domain.response.HolidayResDto">
+    select a.id,
+           a.empid,
+           a.sort,
+           a.begintime,
+           a.duration,
+           d.name state,
+           a.cause,
+           a.stateoperator,
+           a.statetime,
+           a.createtime,
+           c.name empname,
+           b.username name
+    from holiday a
+        left join user b on a.stateoperator= b.id
+        left join employee c on a.empid = c.id
+        left join state d on a.state = d.id
+    where a.empid= #{userid} and sort = 'overtime'
+    <if test="content != null and content != ''">
+        and a.begintime = #{content}
+    </if>
+    ORDER BY a.createtime DESC
+  </select>
+
+
+    <select id="selectHolidayList" resultType="cn.pzhu.pserson.domain.response.HolidayResDto">
+        select a.id,
+        a.empid,
+        a.sort,
+        a.begintime,
+        a.duration,
+        d.name state,
+        a.cause,
+        a.stateoperator,
+        a.statetime,
+        a.createtime,
+        c.name empname,
+        b.username name
+        from holiday a
+        left join user b on a.stateoperator= b.id
+        left join employee c on a.empid = c.id
+        left join state d on a.state = d.id
+        where sort = 'qingjia'
+        <if test="content != null and content != ''">
+            and a.worktime = #{content} or c.name like concat('%',#{content},'%')
+        </if>
+        ORDER BY a.createtime DESC
+
+    </select>
+
+    <select id="selectworktimeList" resultType="cn.pzhu.pserson.domain.response.HolidayResDto">
+        select a.id,
+        a.empid,
+        a.sort,
+        a.begintime,
+        a.duration,
+        d.name state,
+        a.cause,
+        a.stateoperator,
+        a.statetime,
+        a.createtime,
+        c.name empname,
+        b.username name
+        from holiday a
+        left join user b on a.stateoperator= b.id
+        left join employee c on a.empid = c.id
+        left join state d on a.state = d.id
+        where sort = 'overtime'
+        <if test="content != null and content != ''">
+            and a.worktime = #{content} or c.name like concat('%',#{content},'%')
+        </if>
+
+        ORDER BY a.createtime DESC
+
+    </select>
+
+    <select id="selectHoliday" resultType="cn.pzhu.pserson.domain.response.HolidayResDto">
+        select a.id,
+               a.empid,
+               a.sort,
+               a.begintime,
+               a.duration,
+               d.name state,
+               a.cause,
+               a.stateoperator,
+               a.statetime,
+               a.createtime,
+               c.name empname,
+               b.username name
+        from holiday a
+                 left join user b on a.stateoperator= b.id
+                 left join employee c on a.empid = c.id
+                 left join state d on a.state = d.id
+        where a.id = #{id}
+    </select>
+
+    <update id="updateholiday">
+        UPDATE holiday
+        SET
+            state = #{holiday.state},
+            stateoperator = #{holiday.stateoperator},
+            statetime = #{holiday.statetime}
+        WHERE
+            id = #{holiday.id}
+    </update>
+
+
+    <select id="paydetail" resultType="cn.pzhu.pserson.domain.response.PayResDTO">
+        select
+            a.id,
+            a.empid,
+            a.paytime,
+            a.basicpay,
+            a.overtimepay,
+            a.hoildaypay,
+            a.paysum,
+            a.createtime,
+            b.name
+        from pay a left join employee b on a.empid = b.id
+        where a.empid = #{userid}
+        <if test="content != null and content != ''">
+            and paytime = #{content}
+        </if>
+    </select>
+
+    <delete id="deleteHoliday">
+        DELETE FROM holiday  WHERE  id = #{id}
+    </delete>
+</mapper>

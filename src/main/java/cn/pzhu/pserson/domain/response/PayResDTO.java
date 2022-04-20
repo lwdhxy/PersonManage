@@ -1,21 +1,18 @@
-package cn.pzhu.pserson.domain;
+package cn.pzhu.pserson.domain.response;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class Pay {
+public class PayResDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer empid;
     private String paytime;
+    private String empname;
+    private String name;
     private BigDecimal basicpay;
     private BigDecimal overtimepay;
     private BigDecimal hoildaypay;

@@ -14,8 +14,7 @@ public class Notice {
     @Column(name = "createDate")
     private String createDate;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    private Integer userid;
 
     private String content;
 

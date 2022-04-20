@@ -1,6 +1,8 @@
 package cn.pzhu.pserson.controller;
 
 import cn.pzhu.pserson.domain.User;
+import cn.pzhu.pserson.domain.response.HolidayResDto;
+import cn.pzhu.pserson.domain.response.HourResDto;
 import cn.pzhu.pserson.service.RainService;
 import cn.pzhu.pserson.service.UserService;
 import cn.pzhu.pserson.util.Constants;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -139,14 +142,69 @@ public class UserController {
   }
 
   @RequestMapping("/user/hourList")
-  public String hourList(Model model, String content, int pageNum, int pageSize){
-    /// TODO: 2022/4/14
-    return "/user/hourList";
+  public ModelAndView hourList(String content, int pageNum, int pageSize){
+
+    PageInfo pageInfo = userService.selectHourList(content,pageNum,pageSize);
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("hourlist", pageInfo.getList());
+    modelAndView.addObject("pageInfo", pageInfo);
+    modelAndView.setViewName("/user/hourList");
+    return modelAndView;
+  }
+  @RequestMapping("/user/holidayList")
+  public ModelAndView holidayList(String content, int pageNum, int pageSize){
+
+    PageInfo pageInfo = userService.holidayList(content,pageNum,pageSize);
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("holidaylist", pageInfo.getList());
+    modelAndView.addObject("pageInfo", pageInfo);
+    modelAndView.setViewName("/user/holidayList");
+    return modelAndView;
+  }
+  @RequestMapping("/user/overtimeList")
+  public ModelAndView worktimeList(String content, int pageNum, int pageSize){
+
+    PageInfo pageInfo = userService.worktimeList(content,pageNum,pageSize);
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("overtimeList", pageInfo.getList());
+    modelAndView.addObject("pageInfo", pageInfo);
+    modelAndView.setViewName("/user/overtimeList");
+    return modelAndView;
   }
   //查看详细工时
   @RequestMapping("/user/selecthour")
-  public String selecthour(Model model, String content){
-    /// TODO: 2022/4/14
-    return "/user/houradd";
+  public ModelAndView selecthour(int id){
+    HourResDto hourResDto = userService.selecthour(id);
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("dept",hourResDto);
+    modelAndView.setViewName("/user/houradd");
+    return modelAndView;
   }
+  //查看详细假期
+  @RequestMapping("/user/selectHoliday")
+  public ModelAndView selectHoliday(int id){
+    HolidayResDto hourResDto = userService.selectHoliday(id);
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("dept",hourResDto);
+    modelAndView.setViewName("/user/holidayadd");
+    return modelAndView;
+  }
+
+  @RequestMapping("/user/hourupdate")
+  public String hourupdate(int id,String state){
+    userService.hourupdate(id,state);
+    return "redirect:/user/hourList?pageNum=1&pageSize=6";
+  }
+  @RequestMapping("/user/holidayupdate")
+  public String holidayupdate(int id,String state){
+    userService.holidayupdate(id,state);
+    return "redirect:/user/holidayList?pageNum=1&pageSize=6";
+  }
+  @RequestMapping("/user/overtimeupdate")
+  public String overtimeupdate(int id,String state){
+    userService.overtimeupdate(id,state);
+    return "redirect:/user/overtimeList?pageNum=1&pageSize=6";
+  }
+
+
 }

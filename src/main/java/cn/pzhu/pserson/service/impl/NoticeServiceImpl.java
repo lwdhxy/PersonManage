@@ -37,4 +37,9 @@ public class NoticeServiceImpl implements NoticeService {
 //    noticeMapper.insert_Info(notice);
     noticeMapper.insert(notice);
   }
+
+  @Override
+  public Notice selectnotice(Integer id) {
+    return noticeMapper.selectByPrimaryKey(id);
+  }
 }

@@ -1,11 +1,9 @@
 package cn.pzhu.pserson.service.impl;
 
-import cn.pzhu.pserson.dao.dao.DeptMapper;
-import cn.pzhu.pserson.dao.dao.EmployeeMapper;
-import cn.pzhu.pserson.dao.dao.HourMapper;
-import cn.pzhu.pserson.dao.dao.JobMapper;
+import cn.pzhu.pserson.dao.dao.*;
 import cn.pzhu.pserson.domain.*;
 import cn.pzhu.pserson.domain.response.EmployeeResDTO;
+import cn.pzhu.pserson.domain.response.HolidayResDto;
 import cn.pzhu.pserson.domain.response.HourResDto;
 import cn.pzhu.pserson.service.EmployeeService;
 import cn.pzhu.pserson.util.PinyinUtil;
@@ -21,6 +19,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -38,6 +37,8 @@ public class EmployeeServiceImpl implements EmployeeService {
   EmployeeMapper employeeMapper;
   @Resource
   HourMapper hourMapper;
+  @Resource
+  HolidayMapper holidayMapper;
 
   @Override
   public Map<String, Object> getInfo() {
@@ -85,7 +86,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setUpdatepaytime(LocalDateTime.now());
       }
     }
-    employeeMapper.updateByPrimaryKey(employee);
+    employeeMapper.updateByPrimaryKeySelective(employee);
   }
 
   @Override
@@ -111,13 +112,73 @@ public class EmployeeServiceImpl implements EmployeeService {
     hour.setEmpid(userid);
     hour.setCreatetime(LocalDateTime.now());
     hour.setState("submitted");
-    hourMapper.insert(hour);
+    if(ObjectUtils.isEmpty(hour.getId())){
+      hourMapper.insertSelective(hour);
+    }else {
+      hourMapper.updateByPrimaryKeySelective(hour);
+    }
   }
 
   @Override
-  public List<HourResDto> hourList(int userid, String worktime) {
-    return hourMapper.selectKey(userid, worktime);
+  public PageInfo hourList(int userid, String worktime,int pageNum,int pageSize ) {
+    PageInfo<Object> pageInfo = PageHelper.startPage(pageNum, pageSize, true)
+            .doSelectPageInfo(() -> hourMapper.selectKey(userid, worktime));
+    return pageInfo;
   }
 
+  @Override
+  public PageInfo holidayList(int userid, String content, int pageNum, int pageSize) {
+    PageInfo<Object> pageInfo = PageHelper.startPage(pageNum, pageSize, true)
+            .doSelectPageInfo(() -> holidayMapper.holidayList(userid, content));
+    return pageInfo;
+  }
+
+  @Override
+  public void
+  insertholiday(Holiday holiday, Integer userid) {
+    holiday.setEmpid(userid);
+    holiday.setCreatetime(LocalDateTime.now());
+    holiday.setState("submitted");
+    if(ObjectUtils.isEmpty(holiday.getId())){
+      holidayMapper.insertSelective(holiday);
+    }else {
+      holidayMapper.updateByPrimaryKeySelective(holiday);
+    }
+
+  }
+
+  @Override
+  public PageInfo overtimeList(int userid, String content, int pageNum, int pageSize) {
+    PageInfo<Object> pageInfo = PageHelper.startPage(pageNum, pageSize, true)
+            .doSelectPageInfo(() -> holidayMapper.overtimeList(userid, content));
+    return pageInfo;
+  }
+
+  @Override
+  public PageInfo paydetail(int userid, String content, int pageNum, int pageSize) {
+    PageInfo<Object> pageInfo = PageHelper.startPage(pageNum, pageSize, true)
+            .doSelectPageInfo(() -> holidayMapper.paydetail(userid, content));
+    return pageInfo;
+  }
+
+  @Override
+  public HolidayResDto againHoliday(int id) {
+    return holidayMapper.selectHoliday(id);
+  }
+
+  @Override
+  public void deleteHoliday(Integer id) {
+    holidayMapper.deleteHoliday(id);
+  }
+
+  @Override
+  public HourResDto againhour(int id) {
+    return hourMapper.selecthour(id);
+  }
+
+  @Override
+  public void deletehour(Integer id) {
+    hourMapper.deleteByPrimaryKey(id);
+  }
 
 }

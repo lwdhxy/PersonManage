@@ -63,7 +63,7 @@ public class NoticeController {
     if (id != null) {
       rainservice.update_NoticeInfo(notice);
     } else {
-      notice.setUserId(userid);
+      notice.setUserid(userid);
       noticeService.insertNotice(notice);
     }
     mv.setViewName("redirect:/notice/list?pageNum=1&pageSize=6");
@@ -76,5 +76,14 @@ public class NoticeController {
     if (id != null) {
       rainservice.delete_NoticeInfo(id);
     }
+  }
+
+  @RequestMapping("/notice/selectnotice")
+  public ModelAndView selectnotice(Integer id){
+    Notice notice = noticeService.selectnotice(id);
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("dept", notice);
+    modelAndView.setViewName("/notice/selectnotice");
+    return modelAndView;
   }
 }

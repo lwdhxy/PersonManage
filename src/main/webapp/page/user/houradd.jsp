@@ -33,14 +33,14 @@
   
   <body>
     <div class="x-body">
-        <form class="layui-form" method="POST" id="deptForm"  action="${ctx}/employee/inhour">
+        <form class="layui-form" method="POST" id="deptForm">
           <div class="layui-form-item" >
               <label for="worktime" class="layui-form-label">
-                  <span class="x-red">*</span>填报月份
+                  <span class="x-red">*</span>月份
               </label>
               <div class="layui-input-inline">
                   <input type="text" id="worktime" name="worktime" lay-verify="required"
-                  class="layui-input" placeholder="yyyy-MM">
+                  class="layui-input" value="${dept.worktime }" disabled >
               </div>
           </div>
             <div class="layui-form-item" >
@@ -49,16 +49,16 @@
               </label>
               <div class="layui-input-inline">
                   <input type="number" id="worknumber" name="worknumber" required="" lay-verify="required"
-                  autocomplete="off" class="layui-input" placeholder="请输入本月工时">
+                  autocomplete="off" class="layui-input" value="${dept.worknumber }" disabled>
               </div>
           </div>
             <div class="layui-form-item" >
               <label for="workcontent" class="layui-form-label">
-                  <span class="x-red">*</span>日志
+                  <span class="x-red">*</span>工作日志
               </label>
               <div class="layui-input-inline">
-                  <textarea rows="30" cols="20" type="" id="workcontent" name="workcontent" required="" lay-verify="required"
-                            autocomplete="off" class="layui-input" placeholder="请输入工作内容"></textarea>
+                  <textarea rows="30" cols="20" type="" id="workcontent" name="workcontent"
+                            autocomplete="off" class="layui-input">${dept.workcontent }</textarea>
               </div>
           </div>
 
@@ -68,11 +68,11 @@
               <td class="td-manage">
                   <%-- <a title="编辑"  onclick="x_admin_show('编辑','${ctx}/job/add?id=${dept.id }');" href="javascript:;"> --%>
 
-                  <a title="通过"  href="${ctx}/user/add?id=${dept.id }">
-                      <i class="layui-icon">&#xe642;</i>
+                  <a title="通过"  href="${ctx}/user/hourupdate?id=${dept.id }&state=approve" class="layui-btn layui-btn-primary layui-btn-xs">
+                      通过
                   </a>
-                  <a title="驳回" onclick="member_del(this,'${dept.id }')" href="javascript:;">
-                      <i class="layui-icon">&#xe640;</i>
+                  <a title="驳回" href="${ctx}/user/hourupdate?id=${dept.id }&state=reject" class="layui-btn layui-btn-primary layui-btn-xs">
+                      驳回
                   </a>
               </td>
 

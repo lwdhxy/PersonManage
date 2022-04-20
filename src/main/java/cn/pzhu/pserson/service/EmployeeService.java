@@ -1,8 +1,10 @@
 package cn.pzhu.pserson.service;
 
 import cn.pzhu.pserson.domain.Employee;
+import cn.pzhu.pserson.domain.Holiday;
 import cn.pzhu.pserson.domain.Hour;
 import cn.pzhu.pserson.domain.response.EmployeeResDTO;
+import cn.pzhu.pserson.domain.response.HolidayResDto;
 import cn.pzhu.pserson.domain.response.HourResDto;
 import com.github.pagehelper.PageInfo;
 
@@ -27,6 +29,21 @@ public interface EmployeeService {
 
     void inhour(Hour hour, int userid);
 
-  List<HourResDto> hourList(int userid, String worktime);
+  PageInfo hourList(int userid, String worktime, int pageNum, int pageSize);
 
+    PageInfo holidayList(int userid, String content, int pageNum, int pageSize);
+
+  void insertholiday(Holiday holiday, Integer userid);
+
+  PageInfo overtimeList(int userid, String content, int pageNum, int pageSize);
+
+  PageInfo paydetail(int userid, String content, int pageNum, int pageSize);
+
+    HolidayResDto againHoliday(int id);
+
+  void deleteHoliday(Integer id);
+
+  HourResDto againhour(int id);
+
+  void deletehour(Integer id);
 }

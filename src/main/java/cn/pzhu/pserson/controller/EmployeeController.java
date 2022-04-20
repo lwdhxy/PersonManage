@@ -1,10 +1,8 @@
 package cn.pzhu.pserson.controller;
 
-import cn.pzhu.pserson.domain.Dept;
-import cn.pzhu.pserson.domain.Employee;
-import cn.pzhu.pserson.domain.Hour;
-import cn.pzhu.pserson.domain.Job;
+import cn.pzhu.pserson.domain.*;
 import cn.pzhu.pserson.domain.response.EmployeeResDTO;
+import cn.pzhu.pserson.domain.response.HolidayResDto;
 import cn.pzhu.pserson.domain.response.HourResDto;
 import cn.pzhu.pserson.service.EmployeeService;
 import cn.pzhu.pserson.service.RainService;
@@ -160,12 +158,13 @@ public class EmployeeController {
   }
 
   @RequestMapping("/employee/hourList")
-  public ModelAndView hourList(String worktime, HttpSession session){
-    int userid = (int) session.getAttribute("userid");
-    List<HourResDto> hourlist = employeeService.hourList(userid, worktime);
+  public ModelAndView hourList(String content, HttpSession session,int pageNum,int pageSize){
 
+    int userid = (int) session.getAttribute("userid");
+    PageInfo pageInfo = employeeService.hourList(userid, content,pageNum,pageSize);
     ModelAndView modelAndView = new ModelAndView();
-    modelAndView.addObject("hourlist", hourlist);
+    modelAndView.addObject("hourlist", pageInfo.getList());
+    modelAndView.addObject("pageInfo", pageInfo);
     modelAndView.setViewName("/employee/hourList");
     return modelAndView;
   }
@@ -174,8 +173,116 @@ public class EmployeeController {
   public ModelAndView inhour(@ModelAttribute Hour hour,HttpSession session){
     employeeService.inhour(hour, (Integer) session.getAttribute("userid"));
     ModelAndView modelAndView = new ModelAndView();
-    modelAndView.setViewName("forward:/employee/hourList");
+    modelAndView.setViewName("forward:/employee/hourList?pageNum=1&pageSize=6");
     return modelAndView;
+  }
+
+  @RequestMapping("/employee/holidayadd")
+  public ModelAndView holidayadd(String sort){
+    ModelAndView modelAndView = new ModelAndView();
+    if("qingjia".equals(sort)){
+      modelAndView.setViewName("/holiday/holidayadd");
+    }else {
+      modelAndView.setViewName("/overtime/overtimeadd");
+    }
+    return modelAndView;
+  }
+
+  @RequestMapping("/employee/holidayList")
+  public ModelAndView holidayList(String content, HttpSession session,int pageNum,int pageSize){
+
+    int userid = (int) session.getAttribute("userid");
+    PageInfo pageInfo = employeeService.holidayList(userid, content,pageNum,pageSize);
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("holidaylist", pageInfo.getList());
+    modelAndView.addObject("pageInfo", pageInfo);
+    modelAndView.setViewName("/holiday/holidayList");
+    return modelAndView;
+  }
+
+  @RequestMapping("/employee/insertholiday")
+  public ModelAndView insertholiday(@ModelAttribute Holiday holiday, HttpSession session){
+    employeeService.insertholiday(holiday, (Integer) session.getAttribute("userid"));
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("forward:/employee/holidayList?pageNum=1&pageSize=6");
+    return modelAndView;
+  }
+
+  @RequestMapping("/employee/overtimeList")
+  public ModelAndView overtimeList(String content, HttpSession session,int pageNum,int pageSize){
+
+    int userid = (int) session.getAttribute("userid");
+    PageInfo pageInfo = employeeService.overtimeList(userid, content,pageNum,pageSize);
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("holidaylist", pageInfo.getList());
+    modelAndView.addObject("pageInfo", pageInfo);
+    modelAndView.setViewName("/overtime/overtimeList");
+    return modelAndView;
+  }
+
+  @RequestMapping("/employee/insertovertime")
+  public ModelAndView insertovertime(@ModelAttribute Holiday holiday, HttpSession session){
+    employeeService.insertholiday(holiday, (Integer) session.getAttribute("userid"));
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("forward:/employee/overtimeList?pageNum=1&pageSize=6");
+    return modelAndView;
+  }
+
+  @RequestMapping("/employee/paydetail")
+  public ModelAndView paydetail(HttpSession session,String content,int pageNum,int pageSize){
+    PageInfo pageInfo  = employeeService.paydetail((int) session.getAttribute("userid"),content,pageNum,pageSize);
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("paylist", pageInfo.getList());
+    modelAndView.addObject("pageInfo", pageInfo);
+    modelAndView.setViewName("/pay/payList");
+    return modelAndView;
+  }
+
+  @RequestMapping("/employee/againHoliday")
+  public ModelAndView againHoliday(int id){
+    HolidayResDto holidayResDto = employeeService.againHoliday(id);
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("dept", holidayResDto);
+    modelAndView.setViewName("/holiday/holidayadd");
+    return modelAndView;
+  }
+  @RequestMapping("/employee/againovertime")
+  public ModelAndView againovertime(int id){
+    HolidayResDto holidayResDto = employeeService.againHoliday(id);
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("dept", holidayResDto);
+    modelAndView.setViewName("/overtime/overtimeadd");
+    return modelAndView;
+  }
+  @RequestMapping("/employee/againhour")
+  public ModelAndView againhour(int id){
+    HourResDto hourResDto = employeeService.againhour(id);
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("dept", hourResDto);
+    modelAndView.setViewName("/employee/hour");
+    return modelAndView;
+  }
+
+  @RequestMapping("/employee/deleteHoliday")
+  public String deleteHoliday(Integer id){
+    if (id != null) {
+      employeeService.deleteHoliday(id);
+    }
+    return "employee/holidayList";
+  }
+  @RequestMapping("/employee/deleteovertime")
+  public String deleteovertime(Integer id){
+    if (id != null) {
+      employeeService.deleteHoliday(id);
+    }
+    return "employee/overtimeList";
+  }
+  @RequestMapping("/employee/deletehour")
+  public String deletehour(Integer id){
+    if (id != null) {
+      employeeService.deletehour(id);
+    }
+    return "employee/hourList";
   }
 
 }

@@ -1,25 +1,21 @@
-package cn.pzhu.pserson.domain;
+package cn.pzhu.pserson.domain.response;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class Holiday {
+public class HolidayResDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer empid;
-    private String sort;
+    private String empname;
     private String begintime;
     private BigDecimal duration;
     private String cause;
     private String state;
+    private String name;
     private Integer stateoperator;
     private LocalDateTime statetime;
     private LocalDateTime createtime;

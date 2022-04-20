@@ -36,15 +36,15 @@
                   autocomplete="off" class="layui-input" value="${job.name }">
               </div>
           </div>
-            <div class="layui-form-item" >
-              <label for="name" class="layui-form-label">
-                  <span class="x-red">*</span>登录名
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="loginname" name="loginname" required="" lay-verify="required"
-                  autocomplete="off" class="layui-input" value="${job.loginname }">
-              </div>
-          </div>
+<%--            <div class="layui-form-item" >--%>
+<%--              <label for="name" class="layui-form-label">--%>
+<%--                  <span class="x-red">*</span>登录名--%>
+<%--              </label>--%>
+<%--              <div class="layui-input-inline">--%>
+<%--                  <input type="text" id="loginname" name="loginname" required="" lay-verify="required"--%>
+<%--                  autocomplete="off" class="layui-input" value="${job.loginname }">--%>
+<%--              </div>--%>
+<%--          </div>--%>
             <div class="layui-form-item" >
               <label for="name" class="layui-form-label">
                   <span class="x-red">*</span>密码

@@ -2,6 +2,7 @@ package cn.pzhu.pserson.dao.dao;
 
 import cn.pzhu.pserson.dao.provider.UserDynaSqlProvider;
 import cn.pzhu.pserson.domain.User;
+import cn.pzhu.pserson.domain.response.HourResDto;
 import cn.pzhu.pserson.domain.response.IndexHeaderResDTO;
 import cn.pzhu.pserson.util.Constants;
 import java.util.List;
@@ -46,4 +47,6 @@ public interface UserMapper extends Mapper<User> {
 
   @Select("select count(*) from user where loginname like CONCAT(#{loginname},'%')")
     int selectByName(String loginname);
+
+    List<HourResDto> selectKey(String content);
 }

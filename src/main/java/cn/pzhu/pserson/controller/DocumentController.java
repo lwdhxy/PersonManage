@@ -80,7 +80,7 @@ public class DocumentController {
        */
       String path = session.getServletContext().getRealPath("/upload/");
       String filename = document.getFile().getOriginalFilename();
-      path = "E://excel";
+      path = "D://excel";
       File tempFile = new File(path + File.separator + filename);
       tempFile.createNewFile();
       document.getFile().transferTo(tempFile);

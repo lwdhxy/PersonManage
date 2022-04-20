@@ -145,19 +145,19 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="${ctx }/employee/list?pageNum=1&pageSize=6">
+                        <a _href="${ctx }/user/hourList?pageNum=1&pageSize=6">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>工时审批</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="${ctx }/employee/add">
+                        <a _href="${ctx }/user/holidayList?pageNum=1&pageSize=6">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>请假审批</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="${ctx }/employee/add">
+                        <a _href="${ctx }/user/overtimeList?pageNum=1&pageSize=6">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>加班审批</cite>
                         </a>

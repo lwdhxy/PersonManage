@@ -15,7 +15,7 @@ public class NoticeDynaSqlProvider {
 						if(job.getTitle() != null ){
 							VALUES("title", "#{title}");
 						}
-						if(job.getUserId()!=null){
+						if(job.getUserid()!=null){
 							VALUES("user_id","#{user_id}");
 						}
 						if(job.getContent()!=null){
@@ -38,7 +38,7 @@ public class NoticeDynaSqlProvider {
 						if(job.getTitle() != null ){
 							SET("title = #{title}");
 						}
-						if(job.getUserId()!=null){
+						if(job.getUserid()!=null){
 							SET("user_id = #{user_id}");
 						}
 						if(job.getContent()!=null){

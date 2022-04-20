@@ -9,4 +9,6 @@ public interface NoticeService {
 
 
   void insertNotice(Notice notice);
+
+  Notice selectnotice(Integer id);
 }

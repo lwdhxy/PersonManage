@@ -30,7 +30,7 @@
         <a>
           <cite>工时中心</cite></a>
       </span>
-      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="${ctx }/user/hourList" title="刷新">
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="${ctx }/user/hourList?pageNum=${pageInfo.pageNum}&pageSize=6" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body">
@@ -74,27 +74,24 @@
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>${dept.empname }</td>
-            <td>${dept.worktime }</td>
-            <td>${dept.worknumber }</td>
-            <td>${dept.workcontent }</td>
-            <td>${dept.state }</td>
-            <td>${dept.name }</td>
-            <td>${dept.statetime }</td>
-            <td>${dept.createtime }</td>
+         <td>${dept.empname }</td>
+         <td>${dept.worktime }</td>
+         <td>${dept.worknumber }</td>
+         <td>${dept.workcontent }</td>
+         <td>${dept.state }</td>
+         <td>${dept.name }</td>
+         <td>${dept.statetime }</td>
+         <td>${dept.createtime }</td>
 
            <!--  <td class="td-status">
               <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td> -->
                 <td class="td-manage">
-                  <a title="审批"  href="${ctx}/user/selecthour?id=${dept.id }">
-                    <i class="layui-icon">&#xe642;</i>
+                  <a title="审批" class="layui-btn layui-btn-primary layui-btn-xs"
+                     href="${ctx}/user/selecthour?id=${dept.id }" lay-event="detail">审批
                   </a>
                 </td>
               </tr>
         </c:forEach>
-        
-          
-          
           
         </tbody>
       </table>
@@ -110,11 +107,11 @@
         <div>
           <a class="prev" href="">&lt;&lt;</a>
           <c:if test="${pageInfo.pageNum-1 != 0 }">
-                <a class="num" href="../employee/list?pageNum=${pageInfo.pageNum-1}&pageSize=6">${pageInfo.pageNum - 1}</a>
+                <a class="num" href="../employee/hourList?pageNum=${pageInfo.pageNum-1}&pageSize=6">${pageInfo.pageNum - 1}</a>
             </c:if>
           <span class="current">${pageInfo.pageNum}</span>
           <c:if test="${pageInfo.pageNum + 1  <= pageInfo.pages }">
-                <a class="num" href="../employee/list?pageNum=${pageInfo.pageNum+1}&pageSize=6">${pageInfo.pageNum + 1}</a>
+                <a class="num" href="../employee/hourList?pageNum=${pageInfo.pageNum+1}&pageSize=6">${pageInfo.pageNum + 1}</a>
             </c:if>
           <!-- <a class="num" href="">489</a> -->
           <a class="next" href="">&gt;&gt;</a>

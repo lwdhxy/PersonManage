@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
   
@@ -24,38 +25,41 @@
   
   <body>
     <div class="x-body">
-        <form class="layui-form" method="POST" id="deptForm"  action="${ctx}/dept/add">
-        <input type="hidden" name="id" id="id" value="${dept.id }" >
+        <form class="layui-form" method="POST" id="deptForm"  action="${ctx}/notice/add">
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
-                  <span class="x-red">*</span>部门名称
+                  <span class="x-red">*</span>标题
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="name" name="name" required="" lay-verify="required"
-                  autocomplete="off" class="layui-input" value="${dept.name }">
+                  <input type="text" id="title" name="title" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="${dept.title }">
               </div>
              
           </div>
-          <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
-                  <span class="x-red">*</span>详细信息
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="remark" name="remark" required="" lay-verify="required"
-                  autocomplete="off" class="layui-input" value="${dept.remark }">
-              </div>
-            
-          </div>
+        
+          <div class="layui-form-item layui-form-text">
+                    <label for="desc" class="layui-form-label">
+                     <span class="x-red">*</span> 内容
+                    </label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" id="content" name="content" class="layui-textarea">${dept.content }</textarea>
+                    </div>
+                </div>
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <input type="submit" value=" 提交" class="layui-btn" lay-filter="add" lay-submit=""/>
-                 
+              <input class="layui-btn layui-btn-primary" value="返回" type="button" onclick="back()" />
+
           </div>
       </form>
     </div>
     <script>
-        layui.use(['form','layer'], function(){
+
+        function back() {
+
+            window.location.href = document.referrer;
+        }
+            layui.use(['form','layer'], function(){
             $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
@@ -77,18 +81,9 @@
 
           //监听提交
           form.on('submit(add)', function(data){
-        	  
-            console.log(data);
             var id = document.getElementById("id").value;
             console.log(id);
             if (id === null || id === '') {
-                form.on('submit(register)', function(data){
-                    $.post('${ctx}/dept/sadd',dat,function(message){
-                        layer.msg(message);
-                    });
-
-
-
                 layer.alert("增加成功", {icon: 6},function () {
             	document.getElementById('deptForm').submit();
                 // 获得frame索引
@@ -107,7 +102,9 @@
                
             });
             }
-            
+            // console.log(data);
+            //发异步，把数据提交给php
+           
             return false;
           });
           

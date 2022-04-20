@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>人事管理系统</title>
+	<title>人事信息管理系统</title>
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -70,7 +70,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="${ctx }/employee/hourList">
+                        <a _href="${ctx }/employee/hourList?pageNum=1&pageSize=6">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>查看工时</cite>
                         </a>
@@ -91,13 +91,13 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="${ctx }/employee/hour">
+                        <a _href="${ctx }/employee/holidayList?pageNum=1&pageSize=6">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>查看请假信息</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="${ctx }/employee/hour">
+                        <a _href="${ctx }/employee/holidayadd?sort=qingjia">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>请假申请</cite>
                         </a>
@@ -112,13 +112,13 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="${ctx }/employee/hour">
+                        <a _href="${ctx }/employee/overtimeList?pageNum=1&pageSize=6">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>查看加班信息</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="${ctx }/employee/hour">
+                        <a _href="${ctx }/employee/holidayadd">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>加班申请</cite>
                         </a>
@@ -133,7 +133,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="${ctx }/employee/hour">
+                        <a _href="${ctx }/employee/paydetail?pageNum=1&pageSize=6">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>查看薪资信息</cite>
                         </a>

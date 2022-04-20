@@ -62,6 +62,7 @@
             <th>标题</th>
             <th>内容</th>
             <th>发布日期</th>
+
             <th>操作</th>
         </thead>
         <tbody>
@@ -82,7 +83,7 @@
                 <i class="layui-icon">&#xe601;</i>
               </a> -->
               <%-- <a title="编辑"  onclick="x_admin_show('编辑','${ctx}/notice/add?id=${dept.id }');" href="javascript:;"> --%>
-              <c:if test="${userid==dept.userId}">
+              <c:if test="${userid==dept.userid}">
                 <a title="编辑"  href="${ctx}/notice/add?id=${dept.id }">
                 <i class="layui-icon">&#xe642;</i>
               </a>
@@ -90,7 +91,11 @@
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </c:if>
-              
+                <c:if test="${userid!=dept.userid}">
+                    <a title="查看"  href="${ctx}/notice/selectnotice?id=${dept.id }">
+                        <i class="layui-icon">&#xe642;</i>
+                    </a>
+                </c:if>
             </td>
           </tr>
 				
